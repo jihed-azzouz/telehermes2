@@ -5,7 +5,6 @@ const userSchema=mongoose.Schema({
        lowercase:true
     },phoneNumber:{
         type:String,
-        unique:true,
         maxlength:15
     },
     balance:{

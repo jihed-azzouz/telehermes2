@@ -2,7 +2,7 @@ import User from "../db/models/user.js";
 
 export const signup = async (req, res) => {
     try {
-      let { username, phoneNumber } = req.body
+      let { username, phoneNumber} = req.body
       const newUser = new User({
         username:username,
         phoneNumber:phoneNumber,
@@ -20,7 +20,7 @@ export const signup = async (req, res) => {
       res.status(201).json(savedUser)
     } catch (err) {
       if (err.code === 11000) {
-        res.status(400).json({ msg: "Username is already taken." })
+        res.status(400).json({ msg:err.message })
       }
       else res.json({msg:err.message})
       
