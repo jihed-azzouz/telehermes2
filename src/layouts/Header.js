@@ -10,7 +10,7 @@ import {
   Dropdown,
   Button,
 } from "reactstrap";
-import { ReactComponent as LogoWhite } from "../assets/images/logos/amplelogowhite.svg";
+import LogoWhite from "../assets/images/logos/logo.png";
 import user1 from "../assets/images/users/user1.jpg";
 
 const Header = () => {
@@ -28,7 +28,11 @@ const Header = () => {
     <Navbar color="dark" dark expand="md">
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
-          <LogoWhite />
+          <img
+            src={LogoWhite}
+            alt="Logo"
+            style={{ width: "50px", height: "50px" }}
+          />
         </NavbarBrand>
         <Button
           color="dark"
@@ -79,7 +83,7 @@ const Header = () => {
             <DropdownItem>Edit Profile</DropdownItem>
             <DropdownItem divider />
             <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
+
             <DropdownItem>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
