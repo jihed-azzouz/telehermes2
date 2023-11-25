@@ -35,7 +35,9 @@ export const updateTotalXp = async (req, res) => {
         user.xp = user.xp + xpCount;
         const xpBadge = user.badgeIds.find(badge => badge.badgeId === 0);
         if (xpBadge) {
+            xpBadge.badgeLevel=0;
             badges[0].milestone.forEach(level => {
+
                 if (user.xp >= level) {
                     xpBadge.badgeLevel++;
                 }
@@ -58,11 +60,12 @@ export const updateTotalXp = async (req, res) => {
 
 export const updateFitnessXP=async(req,res)=>{
     try {
-        let {username,fitnessXpAPI}=req.query
+        let {username,fitnessXpAPI}=req.body
         const user=await User.findOne({username:username});
         user.fitnessXP=user.fitnessXP+fitnessXpAPI;
         const fitenssBadge=user.badgeIds.find(badge=>badge.badgeId===1)
         if (fitenssBadge){
+            fitenssBadge.badgeLevel=0
             badges[1].milestone.forEach(level=>{
                 if(user.fitnessXP>=level){
                     fitenssBadge.badgeLevel++;
@@ -84,11 +87,12 @@ export const updateFitnessXP=async(req,res)=>{
 }
 export const updateKnowledgeXP=async(req,res)=>{
     try {
-        let {username,knowledgeXpEarned}=req.query
+        let {username,knowledgeXpEarned}=req.body
         const user=await User.findOne({username:username});
         user.knowledgeXP=user.knowledgeXP+knowledgeXpEarned;
         const knowledgeBadge=user.badgeIds.find(badge=>badge.badgeId===2)
         if (knowledgeBadge){
+            knowledgeBadge.badgeLevel=0
             badges[2].milestone.forEach(level=>{
                 if(user.knowledgeXP>=level){
                     knowledgeBadge.badgeLevel++;
