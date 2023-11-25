@@ -1,290 +1,135 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardTitle,
-  Row,
   Col,
+  Input,
+  Button,
+  FormGroup,
+  Label,
+  Badge,
 } from "reactstrap";
 
 const GMN = () => {
-  const [cSelected, setCSelected] = useState([]);
-  const [rSelected, setRSelected] = useState(null);
+  const [secretNumber, setSecretNumber] = useState("");
+  const [guess, setGuess] = useState("");
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [gameWon, setGameWon] = useState(false);
+  const [givenUp, setGivenUp] = useState(false);
 
-  const onRadioBtnClick = (rSelected) => {
-    setRSelected(rSelected);
+  // Function to generate a random 4-digit number
+  const generateSecretNumber = () => {
+    let number = "";
+    while (number.length < 4) {
+      const digit = Math.floor(Math.random() * 10).toString();
+      if (!number.includes(digit)) {
+        number += digit;
+      }
+    }
+    return number;
   };
 
-  const onCheckboxBtnClick = (selected) => {
-    const index = cSelected.indexOf(selected);
-    if (index < 0) {
-      cSelected.push(selected);
-    } else {
-      cSelected.splice(index, 1);
+  useEffect(() => {
+    setSecretNumber(generateSecretNumber());
+  }, []);
+
+  // Function to compare guess with the secret number
+  const checkGuess = () => {
+    let feedback = "";
+    let correctCount = 0;
+    for (let i = 0; i < guess.length; i++) {
+      if (secretNumber.includes(guess[i])) {
+        if (secretNumber[i] === guess[i]) {
+          feedback += "T";
+          correctCount++;
+        } else {
+          feedback += "V";
+        }
+      }
     }
-    setCSelected([...cSelected]);
+    setFeedbacks([...feedbacks, { guess, feedback }]);
+    setGuess("");
+
+    if (correctCount === 4) {
+      setGameWon(true);
+    }
+  };
+
+  const handleGiveUp = () => {
+    setGivenUp(true);
   };
 
   return (
     <div>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* Start Inner Div*/}
-      {/* --------------------------------------------------------------------------------*/}
-      {/* --------------------------------------------------------------------------------*/}
-      {/* Row*/}
-      {/* --------------------------------------------------------------------------------*/}
-      <Row>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-1*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" color="primary">
-                  primary
-                </Button>
-                <Button className="btn" color="secondary">
-                  secondary
-                </Button>
-                <Button className="btn" color="success">
-                  success
-                </Button>
-                <Button className="btn" color="info">
-                  info
-                </Button>
-                <Button className="btn" color="warning">
-                  warning
-                </Button>
-                <Button className="btn" color="danger">
-                  danger
-                </Button>
-                <Button className="btn" color="link">
-                  link
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-2*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Outline Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" outline color="primary">
-                  primary
-                </Button>
-                <Button className="btn" outline color="secondary">
-                  secondary
-                </Button>
-                <Button className="btn" outline color="success">
-                  success
-                </Button>
-                <Button className="btn" outline color="info">
-                  info
-                </Button>
-                <Button className="btn" outline color="warning">
-                  warning
-                </Button>
-                <Button className="btn" outline color="danger">
-                  danger
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-3*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Large Size Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" color="primary" size="lg">
-                  Large Button
-                </Button>
-                <Button className="btn" color="secondary" size="lg">
-                  Large Button
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-4*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Small Size Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" color="primary" size="sm">
-                  Small Button
-                </Button>
-                <Button className="btn" color="secondary" size="sm">
-                  Small Button
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-6*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Active State Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" color="primary" size="lg" active>
-                  Primary link
-                </Button>
-                <Button className="btn" color="secondary" size="lg" active>
-                  Link
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-7*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Disabled State Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" color="primary" size="lg" disabled>
-                  Primary button
-                </Button>
-                <Button className="btn" color="secondary" size="lg" disabled>
-                  Button
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-5*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Block Buttons
-            </CardTitle>
-            <CardBody className="">
-              <div className="button-group">
-                <Button className="btn" color="primary" size="lg" block>
-                  Block level button
-                </Button>
-                <Button className="btn" color="secondary" size="lg" block>
-                  Block level button
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-6*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Checkbox(Stateful Buttons)
-            </CardTitle>
-            <CardBody className="">
-              <h5>Checkbox Buttons</h5>
-              <ButtonGroup>
+      <Col xs="12" md="6">
+        <Card>
+          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
+            Guess My Number
+          </CardTitle>
+          <CardBody>
+            <p>
+              Try to guess the 4-digit number. Each "T" means the right digit in
+              the right position, and "V" means a correct digit but in the wrong
+              position. Good luck!
+            </p>
+            <FormGroup className="d-flex align-items-center">
+              <Label for="numberGuess" className="me-2">
+                Enter your guess:
+              </Label>
+              <Badge
+                color="secondary"
+                onClick={givenUp ? null : handleGiveUp}
+                style={{ cursor: "pointer" }}
+              >
+                {givenUp || gameWon ? secretNumber : "****"}
+              </Badge>
+              {!gameWon && !givenUp && (
                 <Button
-                  color="primary"
-                  onClick={() => onCheckboxBtnClick(1)}
-                  active={cSelected.includes(1)}
+                  size="sm"
+                  color="danger"
+                  className="ms-2"
+                  onClick={handleGiveUp}
                 >
-                  One
+                  Give Up
                 </Button>
-                <Button
-                  color="primary"
-                  onClick={() => onCheckboxBtnClick(2)}
-                  active={cSelected.includes(2)}
-                >
-                  Two
-                </Button>
-                <Button
-                  color="primary"
-                  onClick={() => onCheckboxBtnClick(3)}
-                  active={cSelected.includes(3)}
-                >
-                  Three
-                </Button>
-              </ButtonGroup>
-              <p className="mb-0">Selected: {JSON.stringify(cSelected)}</p>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col xs="12" md="6">
-          {/* --------------------------------------------------------------------------------*/}
-          {/* Card-6*/}
-          {/* --------------------------------------------------------------------------------*/}
-          <Card>
-            <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-              Radio Buttons (Stateful Buttons)
-            </CardTitle>
-            <CardBody className="">
-              <h5>Radio Buttons</h5>
-              <ButtonGroup>
-                <Button
-                  color="primary"
-                  onClick={() => onRadioBtnClick(1)}
-                  active={rSelected === 1}
-                >
-                  One
-                </Button>
-                <Button
-                  color="primary"
-                  onClick={() => onRadioBtnClick(2)}
-                  active={rSelected === 2}
-                >
-                  Two
-                </Button>
-                <Button
-                  color="primary"
-                  onClick={() => onRadioBtnClick(3)}
-                  active={rSelected === 3}
-                >
-                  Three
-                </Button>
-              </ButtonGroup>
-              <p className="mb-0">Selected: {rSelected}</p>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-      {/* --------------------------------------------------------------------------------*/}
-      {/* Row*/}
-      {/* --------------------------------------------------------------------------------*/}
-
-      {/* --------------------------------------------------------------------------------*/}
-      {/* End Inner Div*/}
-      {/* --------------------------------------------------------------------------------*/}
+              )}
+            </FormGroup>
+            <FormGroup>
+              <Input
+                type="text"
+                value={guess}
+                onChange={(e) => setGuess(e.target.value)}
+                id="numberGuess"
+                maxLength="4"
+                disabled={gameWon || givenUp}
+              />
+            </FormGroup>
+            <Button
+              color="primary"
+              onClick={checkGuess}
+              disabled={gameWon || givenUp}
+            >
+              Guess
+            </Button>
+            {gameWon ? (
+              <div className="mt-3">
+                Congratulations! The number was {secretNumber}.
+              </div>
+            ) : null}
+            <div className="mt-3">
+              <strong>Feedback:</strong>
+              <ul>
+                {feedbacks.map((item, index) => (
+                  <li key={index}>
+                    {item.guess}: {item.feedback}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
     </div>
   );
 };

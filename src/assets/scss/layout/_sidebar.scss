@@ -7,6 +7,9 @@
     border-radius: $border-radius;
   }
 }
+.p-3 {
+  background-color: #ddd;
+}
 
 @include media-breakpoint-down(lg) {
   .sidebarArea {

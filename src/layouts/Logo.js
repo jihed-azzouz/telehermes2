@@ -7,7 +7,7 @@ const Logo = () => {
       <img
         src={logoDark}
         alt="Logo"
-        style={{ maxWidth: "100px", height: "auto" }}
+        style={{ maxWidth: "175px", height: "auto" }}
       />{" "}
     </Link>
   );
