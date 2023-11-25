@@ -37,6 +37,10 @@ const userSchema=mongoose.Schema({
     knowledgeXP:{
         type:Number,
         default:0
+    },
+    authToken:{
+     type:String,
+     default:""   
     }
 })
 const User = mongoose.model("User", userSchema, "users")
