@@ -76,6 +76,7 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [quizTaken, setQuizTaken] = useState(false);
 
+  //allow users to play once in 24 hours
   useEffect(() => {
     // Check if the user has already taken the quiz today
     const lastTaken = localStorage.getItem("lastQuizTaken");

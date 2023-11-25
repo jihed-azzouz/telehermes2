@@ -6,8 +6,9 @@ const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
 /***** Pages ****/
 
+const Auth = lazy(() => import("../views/Auth.js"));
 const Starter = lazy(() => import("../views/Starter.js"));
-const Rewards = lazy(() => import("../views/Rewards.js"));
+const Rewards = lazy(() => import("../views/ui/Rewards.js"));
 const Alerts = lazy(() => import("../views/ui/Alerts"));
 const Badges = lazy(() => import("../views/ui/Badges"));
 const GMN = lazy(() => import("../views/ui/GMN.js"));
@@ -24,7 +25,8 @@ const ThemeRoutes = [
     path: "/",
     element: <FullLayout />,
     children: [
-      { path: "/", element: <Navigate to="/starter" /> },
+      { path: "/", element: <Navigate to="/auth" /> },
+      { path: "/auth", exact: true, element: <Auth /> },
       { path: "/starter", exact: true, element: <Starter /> },
       { path: "/rewards", exact: true, element: <Rewards /> },
       { path: "/alerts", exact: true, element: <Alerts /> },
