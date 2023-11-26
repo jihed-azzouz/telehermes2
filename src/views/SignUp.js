@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 function SignUpForm() {
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
     name: "",
     email: "",
@@ -27,6 +29,8 @@ function SignUpForm() {
         [key]: "",
       });
     }
+    // Redirect to the /starter route
+    navigate("/starter");
   };
 
   return (

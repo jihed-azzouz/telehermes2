@@ -10,44 +10,39 @@ const navigation = [
   },
 
   {
-    title: "Badges",
-    href: "/badges",
-    icon: "bi bi-patch-check",
-  },
-  {
     title: "Rewards",
-    href: "/rewards",
+    href: "/starter/rewards",
     icon: "bi bi-trophy",
   },
   {
     title: "WoF",
-    href: "/wheel-of-fortune",
+    href: "/starter/wheel-of-fortune",
     icon: "bi bi-joystick",
   },
   {
     title: "GMN",
-    href: "/gmn",
+    href: "/starter/gmn",
     icon: "bi bi-hdd-stack",
   },
   {
     title: "Cards",
-    href: "/cards",
+    href: "/starter/cards",
     icon: "bi bi-card-text",
   },
   {
     title: "Quiz",
-    href: "/quiz",
+    href: "/starter/quiz",
     icon: "bi bi-columns",
   },
   {
     title: "Table",
-    href: "/table",
+    href: "/starter/table",
     icon: "bi bi-layout-split",
   },
 
   {
     title: "Referrals",
-    href: "/referrals",
+    href: "/starter/referrals",
     icon: "bi bi-link",
   },
 ];

@@ -1,5 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 function SignInForm() {
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
     email: "",
     password: "",
@@ -24,6 +27,8 @@ function SignInForm() {
         [key]: "",
       });
     }
+    // Redirect to the /starter route
+    navigate("/starter");
   };
 
   return (
